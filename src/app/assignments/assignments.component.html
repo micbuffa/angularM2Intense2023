@@ -8,6 +8,13 @@
     </button>
 </a>
   <mat-list *ngFor="let a of assignments">
+    <nav>
+    <a routerLink="/assignment/{{a.id}}">
+      <mat-list-item>
+        <h3 mat-line>{{a.nom}}</h3>
+        <p mat-line>{{a.dateDeRendu | date}}</p>
+        <mat-icon mat-list-icon *ngIf="a.rendu">done</mat-icon>
+      </mat-list-item>
     <h3 mat-subheader>{{a.dateDeRendu | date}}</h3>
     <mat-list-item [ngClass]="{'rendu':a.rendu, 'nonRendu':!a.rendu}"
                    (click)="assignmentClique(a)"
@@ -23,5 +30,7 @@
       </ng-template>
       <mat-divider></mat-divider>
     </mat-list-item>
+    </a>
+    </nav>
   </mat-list>
 </main>

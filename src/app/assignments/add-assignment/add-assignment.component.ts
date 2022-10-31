@@ -28,6 +28,7 @@ dateDeRendu!:Date;
     nouvelAssignment.nom = this.nomDevoir;
     nouvelAssignment.dateDeRendu = this.dateDeRendu;
     nouvelAssignment.rendu = false;
+    nouvelAssignment.id = Math.floor(Math.random()*100000000000000000);
     // le tableau est chez le papa comment faire ?
     //this.assignments.push(nouvelAssignment);
 

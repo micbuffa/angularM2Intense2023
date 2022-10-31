@@ -9,16 +9,19 @@ import { LoggingService } from './logging.service';
 export class AssignmentsService {
   assignments:Assignment[] = [
     {
+      id:1,
       nom: 'Devoir Angular de Mr Buffa',
       dateDeRendu: new Date('2022-11-30'),
       rendu:false
     },
     {
+      id:2,
       nom: 'Devoir WebComponents de Mr Buffa',
       dateDeRendu: new Date('2022-09-30'),
       rendu:false
     },
     {
+      id:3,
       nom: 'Devoir BD de Mr Mopolo',
       dateDeRendu: new Date('2022-09-30'),
       rendu:true
@@ -28,6 +31,13 @@ export class AssignmentsService {
 
   getAssignments():Observable<Assignment[]> {
     return of(this.assignments);
+  }
+
+  getAssignment(id:number):Observable<Assignment|undefined> {
+    const a:Assignment|undefined =
+           this.assignments.find(a => a.id === id);
+
+    return of(a);
   }
 
   addAssignment(assignment:Assignment):Observable<string> {

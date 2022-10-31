@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Assignment } from '../assignment.model';
 
@@ -8,18 +9,39 @@ import { Assignment } from '../assignment.model';
   styleUrls: ['./assignment-detail.component.css'],
 })
 export class AssignmentDetailComponent implements OnInit {
-  @Input() assignmentTransmis!: Assignment|undefined ;
+  assignmentTransmis!: Assignment|undefined ;
 
-  constructor(private assignmentsService: AssignmentsService) {}
+  constructor(private assignmentsService: AssignmentsService,
+              private route:ActivatedRoute,
+              private router:Router) {}
 
-  ngOnInit(): void {}
+  // Appelé AVANT l'affichage du composant, fait partie du
+  // cycle de vie du composant
+  ngOnInit(): void {
+    this.getAssignment();
+  }
+
+  getAssignment() {
+    // on récupère l'id dans l'url
+    // Le + force la conversion en number
+    const id:number = +this.route.snapshot.params['id'];
+    this.assignmentsService.getAssignment(id)
+    .subscribe((assignment) => {
+      this.assignmentTransmis = assignment;
+    });
+  }
 
   onAssignmentRendu() {
     if (!this.assignmentTransmis) return;
     this.assignmentTransmis.rendu = true;
     this.assignmentsService
       .updateAssignment(this.assignmentTransmis)
-      .subscribe((message) => console.log(message));
+      .subscribe((message) => {
+        console.log(message);
+        // et on navigue vers la page d'accueil qui affiche
+        // la liste des assignments
+        this.router.navigate(["/home"]);
+      });
   }
 
   onDeleteAssignment() {
@@ -29,6 +51,9 @@ export class AssignmentDetailComponent implements OnInit {
       .subscribe((message) => {
         console.log(message);
         this.assignmentTransmis = undefined;
+        // et on navigue vers la page d'accueil qui affiche
+        // la liste des assignments
+        this.router.navigate(["/home"]);  
       });
   }
 }

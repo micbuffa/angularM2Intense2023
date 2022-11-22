@@ -57,8 +57,8 @@ export class EditAssignmentComponent implements OnInit {
     // qui va faire la requête HTTP
     // On va naviguer vers la page d'accueil
     this.assignmentsService.updateAssignment(this.assignment)
-    .subscribe((message) => {
-      console.log(message);
+    .subscribe((reponse) => {
+      console.log(reponse.message);
       // et on navigue vers la page d'accueil qui affiche
       // la liste des assignments
       this.router.navigate(["/home"]);

@@ -34,8 +34,8 @@ dateDeRendu!:Date;
 
     //this.nouvelAssignment.emit(nouvelAssignment);
     this.assignmentsService.addAssignment(nouvelAssignment)
-    .subscribe((message) => {
-      console.log(message);
+    .subscribe((reponse) => {
+      console.log(reponse.message);
       // ON VA DEVOIR NAVIGUER AVEC LE ROUTER
       // VERS LE COMPOSANT QUI AFFICHE LA LISTE
       //this.router.navigate(['/home']);

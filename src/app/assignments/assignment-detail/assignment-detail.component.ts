@@ -48,12 +48,12 @@ export class AssignmentDetailComponent implements OnInit {
     if (!this.assignmentTransmis) return;
     this.assignmentsService
       .deleteAssignment(this.assignmentTransmis)
-      .subscribe((message) => {
-        console.log(message);
+      .subscribe((reponse) => {
+        console.log(reponse.message);
         this.assignmentTransmis = undefined;
         // et on navigue vers la page d'accueil qui affiche
         // la liste des assignments
-        this.router.navigate(["/home"]);  
+        this.router.navigate(["/home"]);
       });
   }
 }
